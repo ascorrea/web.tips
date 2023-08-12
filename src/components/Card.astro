@@ -1,61 +1,84 @@
 ---
 interface Props {
 	title: string;
-	body: string;
-	href: string;
+	time: string;
+	tags: string;
 }
 
-const { href, title, body } = Astro.props;
+const { title, time, tags } = Astro.props;
 ---
 
-<li class="link-card">
-	<a href={href}>
-		<h2>
-			{title}
-			<span>&rarr;</span>
-		</h2>
-		<p>
-			{body}
-		</p>
-	</a>
-</li>
+
+<!--
+  Heads up! 👋
+
+  Custom CSS:
+    - animate-background https://github.com/markmead/hyperui/blob/main/tailwind.preset.js
+-->
+
+<article class="articulo">
+	<div class="contenedor-informacion">
+		<time class="fecha" >{time}</time>
+		<a class="enlace-titulo" href="#"> 
+			<h3 class="titulo">
+				{title}
+			</h3>
+		</a>
+		<div class="contenedor-etiquetas">
+			<span>
+				{tags}
+			</span>
+		</div>
+	</div>
+
+</article>
+
 <style>
-	.link-card {
-		list-style: none;
-		display: flex;
-		padding: 1px;
-		background-color: #23262d;
-		background-image: none;
-		background-size: 400%;
-		border-radius: 7px;
-		background-position: 100%;
-		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-	}
-	.link-card > a {
-		width: 100%;
-		text-decoration: none;
-		line-height: 1.4;
-		padding: calc(1.5rem - 1px);
-		border-radius: 8px;
-		color: white;
-		background-color: #23262d;
-		opacity: 0.8;
-	}
-	h2 {
+	*{
+		box-sizing: border-box;
 		margin: 0;
-		font-size: 1.25rem;
-		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 	}
-	p {
-		margin-top: 0.5rem;
-		margin-bottom: 0;
-	}
-	.link-card:is(:hover, :focus-within) {
-		background-position: 0;
-		background-image: var(--accent-gradient);
-	}
-	.link-card:is(:hover, :focus-within) h2 {
-		color: rgb(var(--accent-light));
+	.articulo{
+		width: 32.5rem;
+		background:linear-gradient(to right, #00ff00, #ff00ff);
+		border-radius: 0.5rem;
+		padding: 0.25rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		.contenedor-informacion{
+			width: inherit;
+			background-color: #fff;
+			border-radius: inherit;
+			padding: 40px 16px 16px;
+
+			.fecha{
+				color: #b9b9b9;
+				font-size: 16px;
+				font-weight: 600;
+			}
+			.enlace-titulo{
+				display: block;
+				margin-bottom: 16px;
+				text-decoration: none;
+				.titulo{
+					font-size: 20px;
+				}
+			}
+			.contenedor-etiquetas{
+				display: flex;
+				flex-direction: row wrap;
+				gap: 8px;
+			}
+			.contenedor-etiquetas span{
+				color: #7d33b9;
+				font-size: 13px;
+				background-color: #c9c9c9;
+				padding: 6px 12px;
+				border-radius: 6px;
+				font-weight: 600;
+			}
+		}
 	}
 </style>
